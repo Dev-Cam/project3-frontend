@@ -1,7 +1,7 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-const BASE_URL = "http://localhost:3000";
+import {BASE_URL} from "../config/constants"
 
 function Food(){
   const [food, setFood] = useState([])
@@ -12,9 +12,10 @@ function Food(){
   }, []);
 
   const fetchFood = async () => {
+    const url = `${BASE_URL}/foods`
     console.log('looking for food');
     try {
-      const res = await axios.get(`${BASE_URL}/foods`)
+      const res = await axios.get(url)
       console.log(res.data);
       setFood( res.data )
       
@@ -27,12 +28,11 @@ function Food(){
 
   return(
     <div>
-      <h2>food list</h2>
       <ul>
       {
         food.map(item => {
           return( 
-            <li key={item.id} className="food-item">
+            <li key={item.id} className="tile food">
               {item.name}
             </li>
           )
