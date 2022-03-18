@@ -1,5 +1,9 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import { Outlet, Link } from "react-router-dom"
+import '../stylesheets/tableOrder.css'
+
+
 
 import {BASE_URL} from "../config/constants"
 
@@ -28,19 +32,24 @@ function Servers(){
 
   return(
     <div>
-      <ul>
-      {
-        server.map(item => {
-          return( 
-            <li key={item.id} className="tile server">
-              {item.name}
-            </li>
-          )
-        })
-      }
+      <h2>SERVERS</h2>
+      <div className='table-numbers'>
+        {
+          server.map(server => {
+            return( 
+              <ul>
+              <Link to={`${server.name}/tables`}>
+                <li key={server.id} className="tile">
+                  {server.name}
+                </li>
+              </Link>
+              </ul>
+            )
+          })
+        }
 
-      </ul>
-
+        <Outlet/>
+      </div>
     </div>
 
 

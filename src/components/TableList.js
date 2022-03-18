@@ -1,11 +1,19 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
+import { Outlet, Link, useHistory, useMatch, useParams } from "react-router-dom"
+import '../stylesheets/tableOrder.css'
+
 
 import {BASE_URL} from "../config/constants.js"
 
 function Table(){
   const [Table, setTable] = useState([])
 
+  // const history = useHistory()
+  // console.log("history", history);
+
+  const params = useParams()
+  console.log("params", params);
 
   useEffect( () => {
     fetchTables();
@@ -28,23 +36,25 @@ function Table(){
 
   return(
     <div>
+      <h2>Ordering as  {params.serverId}</h2>
       <h2>Table list</h2>
-      <ul>
-      {
-        Table.map(table => {
-          return( 
-            <li key={table.id} className="tile table">
-              {table.number}
-            </li>
-          )
-        })
-      }
-
-      </ul>
-
+      <div className='table-numbers'>
+        {
+          Table.map(table => {
+            return( 
+              <ul>
+                <Link to={`${table.number}/table-order`} key={table.id} >
+                  <li className="tile">
+                    {table.number}
+                  </li>
+                </Link>
+              </ul>
+            )
+          })
+        }
+        <Outlet />
+      </div>
     </div>
-
-
   )
 } 
 
