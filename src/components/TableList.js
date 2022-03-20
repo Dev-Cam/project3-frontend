@@ -28,6 +28,8 @@ function Table(){
     }
   }
 
+  
+
   return(
     <div>
       <h2>Ordering as  {params.serverId}</h2>

@@ -1,18 +1,37 @@
 import { Link, useParams } from "react-router-dom"
 import {useEffect, useState} from "react";
+import {BASE_URL} from "../config/constants.js"
+
 
 import Menu from './Menu'
 import Order from "./Order"
 import '../stylesheets/tableOrder.css'
+import axios from "axios";
 
 function TableOrder() {
   const params = useParams()
   console.log("params in table order", params);
 
+  useEffect( () => {
+    fetchOrder()
+  })
   
 
   const [order, setOrder] = useState({})
   console.log("current table order", order);
+
+  const fetchOrder = async () => {
+    console.log('fetching order');
+    try {
+      const url = `${BASE_URL}/orders`
+      const res = await axios.get(url)
+      console.log(" order data for table inside fetchOrders()", res.data);
+
+    } catch(err){
+      console.log(err);
+    }
+    
+  }
 
   return(
     <div>
