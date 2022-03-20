@@ -22,7 +22,7 @@ function Menu(props){
     console.log('looking for menu items');
     try {
       const resMenuItem = await axios.get(url)
-      console.log(resMenuItem.data);
+      console.log("menu items from backend", resMenuItem.data);
       setMenuItem( resMenuItem.data )
       
     } catch(err){
@@ -33,6 +33,7 @@ function Menu(props){
   
 
   const addToOrder = async (itemId) => {
+    console.log("add to order function clicked");
     console.log('added to order', itemId, params.serverId, params.tableId);
     try {
       const url = `${BASE_URL}line_items`

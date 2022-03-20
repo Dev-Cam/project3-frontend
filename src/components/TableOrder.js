@@ -41,7 +41,7 @@ function TableOrder() {
           <Menu setOrder={setOrder}/>
           {
             (parseInt(params.tableId) === order.table_id) && order.line_items ?
-            <Order order={order}/>
+            <Order order={order} setOrder={setOrder}/>
             :
             <p>awaiting first item</p>
           }

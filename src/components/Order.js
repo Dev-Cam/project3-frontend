@@ -1,14 +1,26 @@
 import '../stylesheets/tableOrder.css'
+import axios from "axios";
+
+import {BASE_URL} from "../config/constants"
+
 
 function Order(props) {
 
   let total = 0;
-  const getTotal = (itemPrice) => {
+  const addToRunningTotal = (itemPrice) => {
     total += itemPrice
   }
 
-  const clearOrder = () => {
-    
+  const payOrder = async () => {
+    try {
+      const url = `${BASE_URL}orders/pay/${props.order.id}`
+      const res = await axios.post(url)
+      console.log(" order pay response", res.data);
+      props.setOrder({})
+      // TODO:  
+    } catch(err){
+      console.log(err);
+    }
   }
 
  console.log("Props", props);
@@ -19,7 +31,7 @@ function Order(props) {
        
         {
           props.order.line_items.map(menuItem => {
-            getTotal(menuItem.menu_item.price)
+            addToRunningTotal(menuItem.menu_item.price)
             return <p>{menuItem.menu_item.name} ${menuItem.menu_item.price}</p>
           })
         }
@@ -28,7 +40,7 @@ function Order(props) {
 
       </div>
       <div className='buttons'>
-      <button onClick={clearOrder}>Pay</button>
+      <button onClick={payOrder}>Pay</button>
 
         <button>Submit</button>
       </div>
