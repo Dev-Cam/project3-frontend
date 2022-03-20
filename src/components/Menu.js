@@ -18,7 +18,7 @@ function Menu(props){
 
 
   const fetchMenuItem = async () => {
-    const url = `${BASE_URL}/menu_items`
+    const url = `${BASE_URL}menu_items`
     console.log('looking for menu items');
     try {
       const resMenuItem = await axios.get(url)
@@ -35,7 +35,7 @@ function Menu(props){
   const addToOrder = async (itemId) => {
     console.log('added to order', itemId, params.serverId, params.tableId);
     try {
-      const url = `${BASE_URL}/line_items`
+      const url = `${BASE_URL}line_items`
       const res = await axios.post(url, {
         server_id: params.serverId,
         table_id: params.tableId,

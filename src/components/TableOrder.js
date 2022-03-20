@@ -23,7 +23,7 @@ function TableOrder() {
   const fetchOrder = async () => {
     console.log('fetching order');
     try {
-      const url = `${BASE_URL}/orders`
+      const url = `${BASE_URL}orders`
       const res = await axios.get(url)
       console.log(" order data for table inside fetchOrders()", res.data);
 

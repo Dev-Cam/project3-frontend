@@ -16,7 +16,7 @@ function Servers(){
   }, []);
 
   const fetchServer = async () => {
-    const url = `${BASE_URL}/servers`
+    const url = `${BASE_URL}servers`
     console.log('looking for server');
     try {
       const res = await axios.get(url)

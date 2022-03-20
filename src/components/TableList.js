@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import { Outlet, Link, useHistory, useMatch, useParams } from "react-router-dom"
+import { Outlet, Link, useMatch, useParams } from "react-router-dom"
 import '../stylesheets/tableOrder.css'
 
 import {BASE_URL} from "../config/constants.js"
@@ -16,7 +16,7 @@ function Table(){
   }, []);
 
   const fetchTables = async () => {
-    const url = `${BASE_URL}/tables`
+    const url = `${BASE_URL}tables`
     console.log('looking for tables');
     try {
       const res = await axios.get(url)
