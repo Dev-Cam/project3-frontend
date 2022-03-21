@@ -2,11 +2,11 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom'
 import '../stylesheets/tableOrder.css'
-import {BASE_URL} from "../config/constants"
+import {menu, line_items} from "../config/constants"
 
 function Menu(props){
   const params = useParams()
-  console.log(params);
+  // console.log(params);
   const [menuItem, setMenuItem] = useState([]);
   
   
@@ -18,11 +18,9 @@ function Menu(props){
 
 
   const fetchMenuItem = async () => {
-    const url = `${BASE_URL}menu_items`
-    console.log('looking for menu items');
     try {
-      const resMenuItem = await axios.get(url)
-      console.log("menu items from backend", resMenuItem.data);
+      const resMenuItem = await axios.get(menu)
+      // console.log("menu items from backend", resMenuItem.data);
       setMenuItem( resMenuItem.data )
       
     } catch(err){
@@ -33,11 +31,10 @@ function Menu(props){
   
 
   const addToOrder = async (itemId) => {
-    console.log("add to order function clicked");
-    console.log('added to order', itemId, params.serverId, params.tableId);
+    // console.log("add to order function clicked");
+    console.log('added to order item id:', itemId, "Server name:", params.serverId, "Table number:", params.tableId);
     try {
-      const url = `${BASE_URL}line_items`
-      const res = await axios.post(url, {
+      const res = await axios.post(line_items, {
         server_id: params.serverId,
         table_id: params.tableId,
         item_id: itemId

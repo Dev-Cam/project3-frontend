@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom"
 import {useEffect, useState} from "react";
-import {BASE_URL} from "../config/constants.js"
+import {orders} from "../config/constants.js"
 
 
 import Menu from './Menu'
@@ -10,7 +10,7 @@ import axios from "axios";
 
 function TableOrder() {
   const params = useParams()
-  console.log("params in table order", params);
+  // console.log("params in table order", params);
 
   useEffect( () => {
     fetchOrder()
@@ -18,14 +18,13 @@ function TableOrder() {
   
 
   const [order, setOrder] = useState({})
-  console.log("current table order", order);
+  // console.log("current table order", order);
 
   const fetchOrder = async () => {
-    console.log('fetching order');
+    // console.log('fetching order');
     try {
-      const url = `${BASE_URL}orders`
-      const res = await axios.get(url)
-      console.log(" order data for table inside fetchOrders()", res.data);
+      const res = await axios.get(orders)
+      // console.log(" order data for table inside fetchOrders()", res.data);
 
     } catch(err){
       console.log(err);
@@ -35,20 +34,20 @@ function TableOrder() {
 
   return(
     <div>
-      <h2>Server: {params.serverId} </h2>
-      <h2>Order for table {params.tableId}</h2>
+      <h2>Server: {params.serverId} - Order for table {params.tableNumber}</h2>
+      
         <div className='table-order'>
           <Menu setOrder={setOrder}/>
           {
             (parseInt(params.tableId) === order.table_id) && order.line_items ?
             <Order order={order} setOrder={setOrder}/>
             :
-            <p>awaiting first item</p>
+            <h4>Table {params.tableNumber} has been paid.</h4>
           }
         </div>  
         
-      <Link className="back-button" to="/servers">Back to Servers  </Link>
-      <Link className="back-button" to={`/servers/${params.serverId}/tables`}>  Back to Tables</Link>
+      <Link className="button" to="/servers">Back to Servers  </Link>
+      <Link className="button" to={`/servers/${params.serverId}/tables`}>  Back to Tables</Link>
     </div>
   )
 }

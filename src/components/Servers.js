@@ -5,7 +5,7 @@ import '../stylesheets/tableOrder.css'
 
 
 
-import {BASE_URL} from "../config/constants"
+import {servers} from "../config/constants"
 
 function Servers(){
   const [server, setServer] = useState([])
@@ -16,11 +16,10 @@ function Servers(){
   }, []);
 
   const fetchServer = async () => {
-    const url = `${BASE_URL}servers`
-    console.log('looking for server');
+    // console.log('looking for server');
     try {
-      const res = await axios.get(url)
-      console.log(res.data);
+      const res = await axios.get(servers)
+      // console.log(res.data);
       setServer( res.data )
       
     } catch(err){
@@ -38,8 +37,8 @@ function Servers(){
           server.map(server => {
             return( 
               <ul>
-              <Link to={`${server.name}/tables`}>
-                <li key={server.id} className="tile">
+              <Link className="tile" to={`${server.name}/tables`}>
+                <li key={server.id} >
                   {server.name}
                 </li>
               </Link>

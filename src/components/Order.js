@@ -1,7 +1,8 @@
 import '../stylesheets/tableOrder.css'
 import axios from "axios";
+import '../stylesheets/tableOrder.css'
 
-import {BASE_URL} from "../config/constants"
+import {pay} from "../config/constants"
 
 
 function Order(props) {
@@ -13,9 +14,9 @@ function Order(props) {
 
   const payOrder = async () => {
     try {
-      const url = `${BASE_URL}orders/pay/${props.order.id}`
+      const url = `${pay}/${props.order.id}`
       const res = await axios.post(url)
-      console.log(" order pay response", res.data);
+      // console.log(" order pay response", res.data);
       props.setOrder({})
       // TODO:  
     } catch(err){
@@ -40,9 +41,7 @@ function Order(props) {
 
       </div>
       <div className='buttons'>
-      <button onClick={payOrder}>Pay</button>
-
-        <button>Submit</button>
+      <a className="button" onClick={payOrder}>Pay</a>
       </div>
     </div>
   )

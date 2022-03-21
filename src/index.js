@@ -15,7 +15,7 @@ ReactDOM.render(
       <Route path="/" element={<App />}>
         <Route path="servers" element={ <Servers /> } />
         <Route path="servers/:serverId/tables" element={ <TableList /> } />
-        <Route path="servers/:serverId/tables/:tableId/table-order" element={ <TableOrder /> } />
+        <Route path="servers/:serverId/tables/:tableId/:tableNumber/table-order" element={ <TableOrder /> } />
         <Route
           path="*"
           element={

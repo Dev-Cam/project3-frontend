@@ -11,7 +11,7 @@ function App() {
     <div className="App">
 
       <h1>OrderIn - A POS System That Counts</h1>
-      <Link to="/servers">Servers</Link>
+      <Link className="button" to="/servers">Servers</Link>
 
       <div >
         <Outlet />

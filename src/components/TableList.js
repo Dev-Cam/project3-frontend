@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import { Outlet, Link, useMatch, useParams } from "react-router-dom"
 import '../stylesheets/tableOrder.css'
 
-import {BASE_URL} from "../config/constants.js"
+import {tables} from "../config/constants.js"
 
 function Table(){
   const [Table, setTable] = useState([])
@@ -16,11 +16,9 @@ function Table(){
   }, []);
 
   const fetchTables = async () => {
-    const url = `${BASE_URL}tables`
-    console.log('looking for tables');
     try {
-      const res = await axios.get(url)
-      console.log(res.data);
+      const res = await axios.get(tables)
+      // console.log(res.data);
       setTable( res.data )
       
     } catch(err){
@@ -39,8 +37,8 @@ function Table(){
           Table.map(table => {
             return( 
               <ul>
-                <Link to={`${table.number}/table-order`} key={table.number} >
-                  <li className="tile">
+                <Link className="tile" to={`${table.id}/${table.number}/table-order`} key={table.number} >
+                  <li>
                     {table.number}
                   </li>
                 </Link>
